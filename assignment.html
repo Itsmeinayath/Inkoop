@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Input UI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 300px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .message {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .message.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <p class="message" id="message"></p>
+  </div>
+
+  <script>
+    const numberInput = document.getElementById('numberInput');
+    const message = document.getElementById('message');
+
+    numberInput.addEventListener('input', () => {
+      const value = parseInt(numberInput.value);
+
+      if (isNaN(value)) {
+        message.textContent = '';
+        return;
+      }
+
+      if (value < 0) {
+        message.textContent = 'Enter a positive value';
+        message.className = 'message error';
+      } else if (value % 2 === 0) {
+        const evenNumbers = [value + 2, value + 4, value + 6];
+        message.textContent = `Next 3 even numbers: ${evenNumbers.join(', ')}`;
+        message.className = 'message';
+      } else {
+        const oddNumbers = [value + 2, value + 4, value + 6];
+        message.textContent = `Next 3 odd numbers: ${oddNumbers.join(', ')}`;
+        message.className = 'message';
+      }
+    });
+  </script>
+</body>
+</html>
